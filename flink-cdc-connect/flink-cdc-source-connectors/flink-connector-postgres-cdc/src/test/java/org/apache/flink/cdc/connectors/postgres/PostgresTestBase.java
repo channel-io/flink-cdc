@@ -171,7 +171,17 @@ public abstract class PostgresTestBase extends AbstractTestBase {
     }
 
     protected void waitForSnapshotStarted(String sinkName) throws InterruptedException {
+        waitForSnapshotStarted(sinkName, 120000L); // default 2 minutes timeout
+    }
+
+    protected void waitForSnapshotStarted(String sinkName, long timeoutMillis)
+            throws InterruptedException {
+        long start = System.currentTimeMillis();
         while (sinkSize(sinkName) == 0) {
+            if (System.currentTimeMillis() - start > timeoutMillis) {
+                throw new AssertionError(
+                        "Timeout waiting for snapshot to start. Sink: " + sinkName);
+            }
             sleep(300);
         }
     }
