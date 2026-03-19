@@ -19,7 +19,6 @@ package org.apache.flink.cdc.connectors.postgres.utils;
 
 import org.apache.flink.cdc.common.types.DataType;
 import org.apache.flink.cdc.common.types.DataTypes;
-
 import org.apache.flink.table.types.logical.DecimalType;
 
 import io.debezium.config.CommonConnectorConfig;
